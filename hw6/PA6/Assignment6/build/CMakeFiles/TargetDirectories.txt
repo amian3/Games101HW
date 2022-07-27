@@ -1,0 +1,3 @@
+/home/amian/桌面/ComputerGraphics/hw6/PA6/Assignment6/build/CMakeFiles/RayTracing.dir
+/home/amian/桌面/ComputerGraphics/hw6/PA6/Assignment6/build/CMakeFiles/edit_cache.dir
+/home/amian/桌面/ComputerGraphics/hw6/PA6/Assignment6/build/CMakeFiles/rebuild_cache.dir

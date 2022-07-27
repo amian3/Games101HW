@@ -1,0 +1,79 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_0ffed/fast && /usr/bin/make  -f CMakeFiles/cmTC_0ffed.dir/build.make CMakeFiles/cmTC_0ffed.dir/build
+make[1]: 进入目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_0ffed.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_0ffed.dir/src.c.o -c /home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_0ffed
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0ffed.dir/link.txt --verbose=1
+/usr/bin/cc -rdynamic CMakeFiles/cmTC_0ffed.dir/src.c.o -o cmTC_0ffed 
+/usr/bin/ld: CMakeFiles/cmTC_0ffed.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x5e): undefined reference to `pthread_cancel'
+/usr/bin/ld: src.c:(.text+0x6f): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_0ffed.dir/build.make:99：cmTC_0ffed] 错误 1
+make[1]: 离开目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+make: *** [Makefile:127：cmTC_0ffed/fast] 错误 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_1f268/fast && /usr/bin/make  -f CMakeFiles/cmTC_1f268.dir/build.make CMakeFiles/cmTC_1f268.dir/build
+make[1]: 进入目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_1f268.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_1f268.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.23/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1f268
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f268.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create -rdynamic CMakeFiles/cmTC_1f268.dir/CheckFunctionExists.c.o -o cmTC_1f268  -lpthreads 
+/usr/bin/ld: 找不到 -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_1f268.dir/build.make:99：cmTC_1f268] 错误 1
+make[1]: 离开目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+make: *** [Makefile:127：cmTC_1f268/fast] 错误 2
+
+
+
+Determining if the function glXGetProcAddressEXT exists failed with the following output:
+Change Dir: /home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_be57f/fast && /usr/bin/make  -f CMakeFiles/cmTC_be57f.dir/build.make CMakeFiles/cmTC_be57f.dir/build
+make[1]: 进入目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_be57f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=glXGetProcAddressEXT -o CMakeFiles/cmTC_be57f.dir/CheckFunctionExists.c.o -c /usr/local/share/cmake-3.23/Modules/CheckFunctionExists.c
+Linking C executable cmTC_be57f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_be57f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=glXGetProcAddressEXT -rdynamic CMakeFiles/cmTC_be57f.dir/CheckFunctionExists.c.o -o cmTC_be57f  /usr/lib/x86_64-linux-gnu/libGL.so 
+/usr/bin/ld: CMakeFiles/cmTC_be57f.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x14): undefined reference to `glXGetProcAddressEXT'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_be57f.dir/build.make:100：cmTC_be57f] 错误 1
+make[1]: 离开目录“/home/amian/桌面/games101/hw8/assignment8/build/CMakeFiles/CMakeTmp”
+make: *** [Makefile:127：cmTC_be57f/fast] 错误 2
+
+
+

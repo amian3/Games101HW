@@ -1,0 +1,69 @@
+        float SN = centroidBounds.SurfaceArea();
+        int B = 10;
+        int mincostIndex = 0;
+        float minCost = std::numeric_limits<float>::infinity(); 
+        for (int i = 1; i < B; i++)
+        {
+            auto beginning = objects.begin();
+            auto middling = objects.begin() + (objects.size() * i / B);
+            auto ending = objects.end();
+            auto leftshapes = std::vector<Object*>(beginning, middling);
+            auto rightshapes = std::vector<Object*>(middling, ending);
+            //求左右包围盒:
+            Bounds3 leftBounds, rightBounds;
+            for (int k = 0; k < leftshapes.size(); ++k)
+                leftBounds = Union(leftBounds, leftshapes[k]->getBounds().Centroid());
+            for (int k = 0; k < rightshapes.size(); ++k)
+                rightBounds = Union(rightBounds, rightshapes[k]->getBounds().Centroid());
+            float SA = leftBounds.SurfaceArea(); //SA
+            float SB = rightBounds.SurfaceArea(); //SB
+            float cost = 0.125 + (leftshapes.size() * SA + rightshapes.size() * SB) / SN; //计算花费
+            if (cost < minCost) //如果花费更小，记录当前坐标值
+            {
+                minCost = cost;
+                mincostIndex = i;
+            }
+        }
+        //找到mincostIndex后的操作等同于BVH
+        auto beginning = objects.begin();
+        auto middling = objects.begin() + (objects.size() * mincostIndex / B);//划分点选为当前最优桶的位置
+        auto ending = objects.end();
+        
+        
+        
+        
+        
+        
+                float curcost = std::numeric_limits<float>::infinity();
+        float mincost = std::numeric_limits<float>::infinity();
+        int middleindex = 0;
+        Bounds3 fromlefttoright;
+        Bounds3 fromrighttoleft;
+        std::vector<double> SA(objects.size());
+        std::vector<double> SB(objects.size());
+        float SN = centroidBounds.SurfaceArea();
+        
+        for(auto i = 0;i < objects.size(); ++i)
+        {
+            fromlefttoright = Union(fromlefttoright, objects[i]->getBounds().Centroid());
+            SA[i] = fromlefttoright.SurfaceArea();
+        }
+        for(auto i = objects.size() - 2;i >= 0; --i)
+        {
+            fromrighttoleft = Union(fromrighttoleft, objects[i + 1]->getBounds().Centroid());
+            SB[i] = fromrighttoleft.SurfaceArea();
+        }
+        for(int i = 0;i < objects.size(); ++i)
+        {
+            curcost = (SA[i] * (i + 1) + SB[i] * (objects.size() - i - 1))/SN;
+        //    std::cout<<curcost<<" ";
+            if(curcost < mincost)
+            {
+                mincost = curcost;
+                middleindex = i;
+            }
+        }
+      //  middleindex = clamp(0, objects.size() - 1, middleindex);
+        auto beginning = objects.begin();
+        auto middling = objects.begin() + middleindex;
+        auto ending = objects.end();
